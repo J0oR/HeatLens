@@ -29,7 +29,7 @@ export default function SwitchButton({ mode, yearState, yearBounds }) {
 }
 
 
-const SwitchContainer = styled.div`
+const SwitchContainer = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -46,6 +46,7 @@ const Input = styled.input`
   position: absolute;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 `;
 
 const Slider = styled.span`
@@ -57,6 +58,7 @@ const Slider = styled.span`
   border-radius: 50%;
   background-color: white;
   transition: transform 0.4s ease;
+  cursor: pointer;
 
   ${Input}:checked + & {
     transform: translateX(20px);

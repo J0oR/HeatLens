@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-import { chartDataConfig } from "./chartDataConfig";
+import { chartDataConfig } from "../../utils/chartDataConfig";
 import styled from "styled-components";
 // Importa la configurazione
 

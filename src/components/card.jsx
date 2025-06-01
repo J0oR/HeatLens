@@ -1,19 +1,13 @@
 import React, { useState, useMemo, useEffect } from "react";
-import LineChartComponent from "./LineChart"; // Assuming the LineChart component is already created
 import styled from "styled-components";
 import YearSlider from "./YearSlider";
 import { GridLoader } from "react-spinners";
-import AreaChartComponent from "./AreaChart";
-
-const yearRanges = {
-  temp: [1880, 2025],
-  co2: [2015, 2025],
-  meth: [1984, 2025],
-};
+import AreaChartComponent from "./chart/AreaChart";
 
 export default function Card({ title, fetchData, label, dataType }) {
-  const [yearRange, setYearRange] = useState([2020, 2025]);
+  const [yearRange, setYearRange] = useState([2024, 2025]);
   const { data, isLoading, isError } = fetchData();
+
 
   // Filter the data based on the selected year range
   const filteredData = useMemo(() => {
@@ -28,15 +22,13 @@ export default function Card({ title, fetchData, label, dataType }) {
 
   return (
     <CardContainer>
-      <h2>{title}</h2>
-
       {isError && <p>Errore nel caricamento dei dati.</p>}
 
       {/* Render LineChart component with filtered data */}
       {(isLoading || !data) && <GridLoader color="#36d7b7" />}
       {!isLoading && !isError && <AreaChartComponent data={filteredData} label={label} dataType={dataType} />}
 
-      <YearSlider yearState={{ yearRange, setYearRange }} dataType={dataType} yearBounds={yearRanges[dataType]} />
+      <YearSlider yearState={{ yearRange, setYearRange }} dataType={dataType}/>
     </CardContainer>
   );
 }
@@ -47,15 +39,21 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 50px;
-  max-width: 1000px;
-  width: 100%;
+  width: 90%;
   height: fit-content;
-  margin: 100px auto;
+  margin: 0 auto;
 
   border-radius: 10px;
-  padding: 50px;
+  padding: 20px;
   background-color: #0e0d1f;
   color: white;
+
+  @media screen and (min-width: 768px) {
+    width: 70%;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
 
   h2 {
     font-family: "Bebas Neue", sans-serif;

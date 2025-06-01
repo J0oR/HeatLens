@@ -65,3 +65,45 @@ export const fetchMethane = async () => {
 
   return formattedData;
 };
+
+export const fetchN2O = async () => {
+  const { data } = await axios.get(`${BASE_URL}/nitrous-oxide-api`);
+  console.log(data);
+  const formattedData = data.nitrous.map(item => {
+    const floatTime = parseFloat(item.date);
+    const [year, monthDecimal] = item.date.split('.').map(Number);
+    const monthIndex = Math.round((monthDecimal || 0) * 12); // arrotondiamo per sicurezza
+    const formattedTime = `${year} ${monthNames[monthIndex] || ''}`.trim();
+
+    return {
+      time: floatTime,
+      timeFormatted: formattedTime,
+      average: parseFloat(item.average),
+      trend: parseFloat(item.trend),
+    };
+  });
+
+  return formattedData;
+};
+
+export const fetchPolarIce = async () => {
+  const { data } = await axios.get(`${BASE_URL}/arctic-api`);
+  const rawData = data.arcticData.data;
+  const formattedData = Object.entries(rawData)
+    .filter(([_, v]) => v.value !== -9999)
+    .map(([key, value]) => {
+      const year = parseInt(key.slice(0, 4));
+      const month = parseInt(key.slice(4, 6)) - 1;
+      const floatTime = year + month / 12;
+
+      return {
+        time: floatTime,
+        timeFormatted: `${monthNames[month]} ${year}`,
+        value: value.value,
+        anomaly: value.anom,
+        monthlyMean: value.monthlyMean,
+      };
+    });
+
+  return formattedData;
+};

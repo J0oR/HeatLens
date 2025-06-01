@@ -3,15 +3,17 @@ import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import styled from "styled-components";
 import SwitchButton from "./SwitchButton";
-//import HandleTooltip from "./HandleTooltip";
+import { chartDataConfig } from "../utils/chartDataConfig";
 
 import Slider from "rc-slider";
 
-export default function YearSlider({ yearState, dataType, yearBounds }) {
+export default function YearSlider({ yearState, dataType }) {
+  const yearBounds = chartDataConfig[dataType].yearRange;
   const { yearRange, setYearRange } = yearState;
   const [singleMode, setSingleMode] = useState(false);
 
-  const marks = { [yearBounds[0]]: yearBounds[0], [yearBounds[1]]: yearBounds[1] };
+  const marks = chartDataConfig[dataType].marks;
+
 
   // Handle slider change
   const handleChange = (val) => {
@@ -29,20 +31,17 @@ export default function YearSlider({ yearState, dataType, yearBounds }) {
         included={singleMode ? false : true}
         keyboard={true}
         marks={marks}
-        step={1}
       />
 
-      <YearLabelContainer>
-        <span className={!singleMode ? "hidden" : ""}>{yearRange[0]}</span>
-        <span className={singleMode ? "hidden" : ""}>
-          {yearRange[0]} – {yearRange[1]}
-        </span>
-      </YearLabelContainer>
-
       <ModeWrapper>
-        <span className="mode-label">Singolo Anno</span>
+        <span className="mode-label">{singleMode ? "Single Year" : "Range"}</span>
         <SwitchButton mode={{ singleMode, setSingleMode }} yearState={yearState} yearBounds={yearBounds} />
-        <span className="mode-label">Intervallo</span>
+        <YearLabelContainer>
+          <span className={!singleMode ? "hidden" : ""}>{yearRange[0]}</span>
+          <span className={singleMode ? "hidden" : ""}>
+            {yearRange[0]} – {yearRange[1]}
+          </span>
+        </YearLabelContainer>
       </ModeWrapper>
     </SliderContainer>
   );
@@ -69,86 +68,69 @@ const SliderStyled = styled(Slider)`
 
       border-radius: 3px;
     }
-  }
-
-  .rc-slider-track {
-    width: 100%;
-    height: 100%;
-    background-color: #5f5f6d;
-    border-radius: 3px;
-    z-index: 10;
-  }
-
-  .rc-slider-handle {
-    //border: 2px solid #0077ff;
-    //background-color: white;
-    border: none;
-    height: 114%;
-    position: absolute;
-    top: 2px;
-    width: 15px;
-    border-radius: 5px;
-    margin-top: 0px;
-    z-index: 20;
-    cursor: pointer;
-    background-color: #96dbfa;
-    opacity: 1;
-    &:focus {
-      box-shadow: 0 0 0 4px rgba(0, 119, 255, 0.2);
+    .rc-slider-track {
+      width: 100%;
+      height: 100%;
+      background-color: #5f5f6d;
+      border-radius: 3px;
+      z-index: 10;
     }
-  }
-
-  .rc-slider-handle-dragging {
-    border: none !important;
-  }
-
-  .rc-slider-mark-text {
-    color: #555;
-    font-size: 0.75rem;
-    position: absolute;
-    top: 40px;
-
-    &:nth-child(1) {
-      left: 3% !important;
+    .rc-slider-handle {
+      //border: 2px solid #0077ff;
+      //background-color: white;
+      border: none;
+      height: 114%;
+      position: absolute;
+      top: 2px;
+      width: 15px;
+      border-radius: 5px;
+      margin-top: 0px;
+      z-index: 20;
+      cursor: pointer;
+      background-color: #96dbfa;
+      opacity: 1;
+      &:focus {
+        box-shadow: 0 0 0 4px rgba(0, 119, 255, 0.2);
+      }
+      &.rc-slider-handle-dragging {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
     }
-    &:nth-child(2) {
-      left: 97% !important;
+
+    .rc-slider-step {
+      position: absolute;
+      width: 100%;
+      height: 10px;
+      top: 140%;
+      /* background: white; */
+      /* color: white; */
+
+      .rc-slider-dot {
+        z-index: 30;
+        position: absolute;
+        width: 2px;
+        height: 10px;
+        border: none;
+        border-radius: 0;
+        background-color: #a2a2a2;
+        background-image: repeating-linear-gradient(to right, rgba(#fff, 0.2), rgba(#fff, 0.2) calc(12.5% - 1px), #05051a 12.5%);
+      }
     }
-  }
-
-  .rc-slider-step {
-    height: 100%;
-  }
-
-  .rc-slider-dot {
-    z-index: 30;
-    position: absolute;
-    width: 1px;
-    height: 90%;
-    top: 5%;
-    border: none;
-    border-radius: 0;
-    background-color: #05051a;
-    background-image: repeating-linear-gradient(to right, rgba(#fff, 0.2), rgba(#fff, 0.2) calc(12.5% - 1px), #05051a 12.5%);
-
-    &:first-child,
-    &:last-child {
-      display: none;
+    .rc-slider-mark-text {
+      color: #a2a2a2;
+      font-size: 0.75rem;
+      position: absolute;
+      top: 70px;
     }
-  }
-
-  .rc-slider-dot-active {
-    //background-color: #0077ff;
   }
 `;
-
 
 const YearLabelContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 50px;
   font-size: 1.2rem;
 
   .hidden {
@@ -163,8 +145,8 @@ const ModeWrapper = styled.div`
   gap: 20px;
   margin: 1rem 0;
   width: 100%;
+  margin-top: 100px;
 
-  
   .obscured {
     color: #969696;
   }
