@@ -44,7 +44,7 @@ const CardContainer = styled.div`
   margin: 0 auto;
 
   border-radius: 10px;
-  padding: 20px;
+  padding: 40px;
   background-color: #0e0d1f;
   color: white;
 

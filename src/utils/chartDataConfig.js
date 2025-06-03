@@ -42,6 +42,10 @@ export const chartDataConfig = {
           url: "https://arctic.noaa.gov/Report-Card/",
         },
       ]
+    },
+    chartTooltip: {
+      label: "Temperature anomaly",
+      unit: "°C"
     }
   },
   co2: {
@@ -85,7 +89,11 @@ export const chartDataConfig = {
           url: "https://www.nature.com/articles/d41586-019-01497-0",
         }
       ]
-    }
+    },
+    chartTooltip: {
+      label: "Carbon dioxide (CO₂) level",
+      unit: "ppm"
+    },
   },
   meth: {
     line1dataKey: "average",
@@ -133,6 +141,10 @@ export const chartDataConfig = {
           url: "https://www.nature.com/articles/nature06950",
         },
       ]
+    },
+    chartTooltip: {
+      label: "Methane (CH₄) level",
+      unit: "ppb"
     }
   },
   n2o: {
@@ -160,11 +172,11 @@ export const chartDataConfig = {
       2020: "2020",
       2023: "2023",
     },
-    summary:{
+    summary: {
       title: "Nitrous Oxide Concentration",
       info: "This chart displays the globally averaged atmospheric nitrous oxide concentration from 2001 to the present, based on monthly data collected from marine surface sites. Values are expressed as mole fractions in dry air, measured in parts per billion (ppb)."
     },
-    info:{
+    info: {
       title: "The Impact of Nitrous Oxide on Climate and Ozone",
       text: "Nitrous oxide (N₂O) is a potent greenhouse gas emitted from various human activities, including agriculture (notably through the use of synthetic fertilizers and manure management), fossil fuel combustion, wastewater treatment, and certain industrial processes. It also occurs naturally through microbial activity in soils and oceans. Although present in smaller quantities than carbon dioxide or methane, nitrous oxide is the third most significant heat-trapping gas in Earth's atmosphere. It has a global warming potential approximately 265 times that of carbon dioxide over a 100-year period and remains in the atmosphere for about 114 years. Beyond its role in climate change, nitrous oxide is currently the leading ozone-depleting substance emitted by human activities, surpassing chlorofluorocarbons (CFCs) in its impact on the stratospheric ozone layer.",
       links: [
@@ -177,7 +189,11 @@ export const chartDataConfig = {
           url: "https://www.epa.gov/ghgemissions/overview-greenhouse-gases",
         }
       ]
-    }
+    },
+    chartTooltip: {
+      label: "Nitrous oxide (N₂O) level",
+      unit: "ppb"
+    },
   },
   polarIce: {
     line1dataKey: "value",
@@ -203,14 +219,14 @@ export const chartDataConfig = {
       2014: "2014",
       2021: "2021",
     },
-    summary:{
+    summary: {
       title: "Sea Ice Extent",
       info: "This chart displays the global sea ice extent from 1979 to 2025, based on monthly data. Measurements cover both the Northern and Southern Hemispheres and are expressed in million square kilometers. Values represent total extent, with deviations (anomalies) shown relative to the 1991–2020 baseline."
     },
-    info:{
+    info: {
       title: "The Rapid Transformation of the Arctic",
       text: "The Arctic is warming nearly twice as fast as the global average—a phenomenon known as Arctic amplification. This accelerated warming is driven by feedback mechanisms like the albedo effect (where melting ice exposes darker surfaces that absorb more heat) and the impact of pollutants such as black carbon. Since the late 20th century, Arctic sea ice has declined dramatically, with losses accelerating from around 2–3% in the 1980s to over 12% per decade since 2010. Another major concern is permafrost thawing. As frozen ground warms, it releases methane—a potent greenhouse gas—into the atmosphere, further amplifying global warming. These changes not only impact Arctic ecosystems but also influence weather patterns and climate systems worldwide.",
-      links:[
+      links: [
         {
           title: "2024 Arctic Report Card documents rapid, dramatic change",
           url: "https://www.climate.gov/news-features/understanding-climate/2024-arctic-report-card-documents-rapid-dramatic-change"
@@ -224,7 +240,10 @@ export const chartDataConfig = {
           url: "https://toolkit.climate.gov/arctic-global-linkages"
         }
       ]
+    },
+    chartTooltip: {
+      label: "Polar ice extent",
+      unit: "Mkm²"
     }
-
   },
 };

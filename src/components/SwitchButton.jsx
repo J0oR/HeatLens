@@ -38,7 +38,7 @@ const SwitchContainer = styled.label`
   height: 30px;
   border-radius: 50px;
   transition: 0.4s;
-  background-color: ${({ $checked }) => ($checked ? "#4caf50" : "#ccc")};
+  background-color: ${({ $checked }) => ($checked ? "#4caf50" : "#ADD8E6")};
 `;
 
 const Input = styled.input`
