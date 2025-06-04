@@ -84,6 +84,14 @@ const Header = styled.div`
   h1 {
     flex: 1;
     font-size: clamp(2rem, 5vw + 1rem, 4rem);
+    font-family: 'Oswald', sans-serif;
+  }
+
+  h3 {
+    flex: 1;
+    font-size: clamp(1rem, 3vw + 0.5rem, 1.5rem);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
   }
 
   div {
@@ -111,6 +119,7 @@ const Hero = styled.div`
 
   @media screen and (max-width: 768px) {
     align-items: center;
+    height: 70vh;
   }
 
   /* overflow: hidden;
@@ -137,22 +146,15 @@ const StatsContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: fit-content;
-  gap: 50px;
   background-color: #171d289f;
   backdrop-filter: blur(1px); /* Aggiunge un effetto di sfocatura allo sfondo */
   border-radius: 10px;
   padding: 20px;
+  gap: 50px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
   }
 `;
 
-const FullImage = styled.img`
-  top: 0;
-  left: 0;
-  object-fit: contain;
-  width: 300px;
-  border-radius: 10px;
-`;

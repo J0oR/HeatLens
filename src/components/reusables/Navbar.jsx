@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo.png";
 import { TiThMenuOutline } from "react-icons/ti";
@@ -12,27 +12,27 @@ export default function Navbar() {
     <NavContainer>
       <div className="logoBurgerWrapper">
         <li className="logo">
-          <Link to="/">
+          <NavLink to="/">
             <img src={logo} alt="Logo Image" />
-          </Link>
+          </NavLink>
         </li>
         <button onClick={() => setOpen(!open)}>{open ? <RiCloseLargeFill /> : <TiThMenuOutline />}</button>
       </div>
       <LinksContainer open={open}>
         <li>
-          <Link to="/temperature">Temperature</Link>
+          <StyledLink to="/temperature" className={({ isActive }) => (isActive ? 'active' : '')}>Temperature</StyledLink>
         </li>
         <li>
-          <Link to="/co2">C02</Link>
+          <StyledLink to="/co2" className={({ isActive }) => (isActive ? 'active' : '')}>C02</StyledLink>
         </li>
         <li>
-          <Link to="/methane">Methane</Link>
+          <StyledLink to="/methane" className={({ isActive }) => (isActive ? 'active' : '')}>Methane</StyledLink>
         </li>
         <li>
-          <Link to="/n2o">N2O</Link>
+          <StyledLink to="/n2o" className={({ isActive }) => (isActive ? 'active' : '')}>N2O</StyledLink>
         </li>
         <li>
-          <Link to="/polarIce">Polar Ice</Link>
+          <StyledLink to="/polarIce" className={({ isActive }) => (isActive ? 'active' : '')}>Polar Ice</StyledLink>
         </li>
       </LinksContainer>
     </NavContainer>
@@ -126,9 +126,25 @@ const LinksContainer = styled.ul`
     gap: 30px;
     padding: 50px 0;
   }
+`;
 
-  a{
-    text-decoration: none;
-    color: white;
+
+
+const StyledLink = styled(NavLink)`
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+    display: inline-block;
+
+
+  &.active {
+    color: #4D28BB;
+    font-weight: 800;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 `;

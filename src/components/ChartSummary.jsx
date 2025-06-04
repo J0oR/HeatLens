@@ -43,5 +43,9 @@ const Container = styled.div`
   p{
     font-size: clamp(0.8rem, 1.2rem, 1.5rem);
     line-height: 2;
+    
+    @media screen and (min-width: 768px) {
+      text-align: justify;
+    }
   }
 `;

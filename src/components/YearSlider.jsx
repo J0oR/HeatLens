@@ -39,6 +39,8 @@ export default function YearSlider({ yearState, dataType }) {
         included={singleMode ? false : true}
         keyboard={true}
         marks={marks}
+        pushable={2}
+        allowCross={false}
         handleRender={(node, props) => (
           <Tooltip overlay={`${props.value}`}  placement="top" key={props.index}>
             {node}
@@ -67,7 +69,8 @@ const SliderContainer = styled.div`
 const SliderStyled = styled(Slider)`
   &.rc-slider {
     position: relative;
-    height: 50px !important;
+    height: 25px !important;
+    cursor: pointer;
 
     .rc-slider-rail {
       width: 100%;
@@ -86,19 +89,21 @@ const SliderStyled = styled(Slider)`
     .rc-slider-handle {
       //border: 2px solid #0077ff;
       //background-color: white;
-      border: none;
-      height: 114%;
-      position: absolute;
-      top: 2px;
-      width: 15px;
-      border-radius: 5px;
-      margin-top: 0px;
+      height: 140%;
+      width: 10px;
+      border-radius: 2px;
       z-index: 20;
       cursor: pointer;
-      background-color: #96dbfa;
+      background-color: #ADD8E6;
       opacity: 1;
-      &:focus {
-        box-shadow: 0 0 0 4px rgba(0, 119, 255, 0.2);
+             border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+
+      &:focus, &:hover {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
       }
       &.rc-slider-handle-dragging {
         border: none !important;
@@ -110,8 +115,7 @@ const SliderStyled = styled(Slider)`
     .rc-slider-step {
       position: absolute;
       width: 100%;
-      height: 10px;
-      top: 140%;
+      top: 155%;
       /* background: white; */
       /* color: white; */
 
@@ -119,7 +123,7 @@ const SliderStyled = styled(Slider)`
         z-index: 30;
         position: absolute;
         width: 2px;
-        height: 10px;
+        height: 5px;
         border: none;
         border-radius: 0;
         background-color: #a2a2a2;
@@ -130,7 +134,7 @@ const SliderStyled = styled(Slider)`
       color: #a2a2a2;
       font-size: 0.75rem;
       position: absolute;
-      top: 70px;
+      top: 35px;
     }
   }
 `;

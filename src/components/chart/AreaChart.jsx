@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { chartDataConfig } from "../../utils/chartDataConfig";
 import { CustomYAxisTick, CustomXAxisTick,  CustomTooltip } from "./chartCustomSettings";
 import styled from "styled-components";
@@ -53,14 +53,11 @@ export default function AreaChartComponent({ data, label, dataType }) {
             <stop offset="100%" stopColor="#322D54" stopOpacity={0.2} />
           </linearGradient>
 
-          <filter id="shadow" height="200%">
-            <feDropShadow dx="0" dy="10" stdDeviation="10" />
-          </filter>
         </defs>
 
         <CartesianGrid horizontal={true} vertical={false} strokeDasharray="10" strokeWidth={0.5} stroke="#464859" opacity={1} fill="#0E0D1F" zIndex={100} />
 
-        <XAxis dataKey="timeFormatted" textAnchor="middle" height={70} interval={"preserveStart"} tickLine={false} tickMargin={30} axisLine={false}  tick={<CustomXAxisTick />}/>
+        <XAxis dataKey="timeFormatted" textAnchor="middle" height={70} interval={"preserveStart"} tickLine={false} tickMargin={30}  tick={<CustomXAxisTick />}/>
 
         <YAxis
           domain={[minValue, maxValue]}
@@ -74,7 +71,13 @@ export default function AreaChartComponent({ data, label, dataType }) {
           allowDataOverflow={true}
           tickMargin={30}
           tick={<CustomYAxisTick />}
+          hide={isMobile}
         />
+
+        <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+
+<YAxis dataKey="value" />
+<XAxis dataKey="name" />
 
         <Tooltip content={<CustomTooltip ValueLabel={TooltipLabel} ValueUnit={TooltipUnit} />} offset={30} cursor={{ stroke: 'w', strokeWidth: 2 }}/>
 
@@ -85,7 +88,7 @@ export default function AreaChartComponent({ data, label, dataType }) {
           fillOpacity={1}
           fill="url(#colorLine1)"
           name={`Anomalia alla stazione (${label})`}
-          strokeWidth={2}
+          strokeWidth={isMobile ? 0.5 : 2}
           zIndex={5}
           baseValue={minValue}
         />

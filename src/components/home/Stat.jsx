@@ -23,7 +23,7 @@ const Container = styled.div`
   color: white;
   font-size: 2rem;
   gap: 10px;
-
+  
   div {
     display: flex;
     justify-content: flex-start;

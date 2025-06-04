@@ -47,12 +47,15 @@ const Container = styled.div`
     text-align: center;
     font-family: "Oswald", sans-serif;
     font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
-
   }
 
   p {
     font-size: clamp(0.8rem, 1.2rem, 1.5rem);
     line-height: 2;
+
+    @media screen and (max-width: 768px) {
+      text-align: justify;
+    }
   }
 
   ul {
