@@ -1,12 +1,13 @@
 import { PiChartLineUpBold } from "react-icons/pi";
 import styled from "styled-components";
+import { ClipLoader } from "react-spinners";
 
-export default function Stat({ amount, label, icon }) {
+export default function Stat({isLoading, amount, label, icon }) {
   return (
     <Container>
       <div>
         {icon}
-        <span className="amount">{amount}</span>
+        <span className="amount">{isLoading ? <ClipLoader size={20} color="#36d7b7" /> : amount}</span>
       </div>
       <span className="stat-label">{label}</span>
     </Container>

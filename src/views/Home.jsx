@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Navbar from "../components/reusables/Navbar";
 import Footer from "../components/reusables/Footer";
 import styled from "styled-components";
 import { useTemperature, useCO2, useMethane, useN2O, usePolarIce } from "../hooks/useGlobalWarming";
-import { useMemo } from "react";
 import { PiCloudArrowUpBold } from "react-icons/pi";
 import { BsThermometerSun, BsSnow2 } from "react-icons/bs";
-
 import Stat from "../components/home/Stat";
 
 function Home() {
@@ -16,18 +14,29 @@ function Home() {
   const { data: n2oData, isLoading: n2oLoading } = useN2O();
   const { data: polarIceData, isLoading: polarIceLoading } = usePolarIce();
 
-  const lastStat = useMemo(() => {
-    if (!tempLoading && !co2Loading && !methaneLoading) {
-      return {
-        temp: tempData?.[tempData.length - 1],
-        co2: co2Data?.[co2Data.length - 1],
-        methane: methaneData?.[methaneData.length - 1],
-        n2o: n2oData?.[n2oData.length - 1],
-        polarIce: polarIceData?.[polarIceData.length - 1],
-      };
-    }
-    return null;
-  }, [tempData, co2Data, methaneData, n2oData, polarIceData, tempLoading, co2Loading, methaneLoading, n2oLoading, polarIceLoading]);
+  const lastStat = useMemo(() => ({
+    temp: !tempLoading && tempData?.[tempData.length - 1],
+    co2: !co2Loading && co2Data?.[co2Data.length - 1],
+    methane: !methaneLoading && methaneData?.[methaneData.length - 1],
+    n2o: !n2oLoading && n2oData?.[n2oData.length - 1],
+    polarIce: !polarIceLoading && polarIceData?.[polarIceData.length - 1],
+  }), [tempData, co2Data, methaneData, n2oData, polarIceData, tempLoading, co2Loading, methaneLoading, n2oLoading, polarIceLoading]);
+
+  const images = ["/carousel/desert.jpg", "/carousel/glacier.jpeg", "/carousel/flood.jpg", "/carousel/iceMelt.jpg"];
+  const [bgIndex, setBgIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setBgIndex(prev => (prev + 1) % images.length);
+        setFade(true);
+      }, 1000);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <HomePage>
@@ -44,20 +53,21 @@ function Home() {
           reshaping our world, one critical data point at a time.
         </div>
       </Header>
+
       <Hero>
+        <BackgroundImage $bgImage={images[bgIndex]} $fade={fade} />
         {lastStat ? (
           <StatsContainer>
-            <Stat amount={lastStat.temp.station ?? "N/A"} label={"C° Anomaly"} icon={<BsThermometerSun />} />
-            <Stat amount={lastStat.co2.cycle ?? "N/A"} label={"CO2"} icon={<PiCloudArrowUpBold />} />
-            <Stat amount={lastStat.methane.average ?? "N/A"} label={"Methane"} icon={<PiCloudArrowUpBold />} />
-            <Stat amount={lastStat.n2o.average ?? "N/A"} label={"N2O"} icon={<PiCloudArrowUpBold />} />
-            <Stat amount={lastStat && lastStat.polarIce ? lastStat.polarIce.value : "N/A"} label={"Polar ice"} icon={<BsSnow2 />} />
+            <Stat isLoading={tempLoading} amount={lastStat.temp?.station ?? "N/A"} label={"C° Anomaly"} icon={<BsThermometerSun />} />
+            <Stat isLoading={co2Loading} amount={lastStat.co2?.cycle ?? "N/A"} label={"CO2"} icon={<PiCloudArrowUpBold />} />
+            <Stat isLoading={methaneLoading} amount={lastStat.methane?.average ?? "N/A"} label={"Methane"} icon={<PiCloudArrowUpBold />} />
+            <Stat isLoading={n2oLoading} amount={lastStat.n2o?.average ?? "N/A"} label={"N2O"} icon={<PiCloudArrowUpBold />} />
+            <Stat isLoading={polarIceLoading} amount={lastStat.polarIce?.value ?? "N/A"} label={"Polar ice"} icon={<BsSnow2 />} />
           </StatsContainer>
         ) : (
           <span>Loading data...</span>
         )}
       </Hero>
-      {/* Home content will go here */}
 
       <Footer />
     </HomePage>
@@ -84,13 +94,13 @@ const Header = styled.div`
   h1 {
     flex: 1;
     font-size: clamp(2rem, 5vw + 1rem, 4rem);
-    font-family: 'Oswald', sans-serif;
+    font-family: "Oswald", sans-serif;
   }
 
   h3 {
     flex: 1;
     font-size: clamp(1rem, 3vw + 0.5rem, 1.5rem);
-    font-family: 'Oswald', sans-serif;
+    font-family: "Oswald", sans-serif;
     font-weight: 300;
   }
 
@@ -102,52 +112,64 @@ const Header = styled.div`
 `;
 
 const Hero = styled.div`
+  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   padding: 20px;
-  width: 80%;
-  margin: 0 auto 200px auto;
-  position: relative;
-
-  margin-top: 100px;
-  height: 500px;
-  background-image: url("/background2.jpeg");
-  background-size: cover; /* Assicurati che l'immagine copra l'intero contenitore */
-  background-position: center; /* Posiziona l'immagine al centro */
+  width: 60vw;
+  height: 60vh;
+  margin: 100px auto 200px auto;
   border-radius: 25px;
+  overflow: hidden;
+    background-color: black; /* 👈 fallback di colore */
+
 
   @media screen and (max-width: 768px) {
     align-items: center;
-    height: 70vh;
+    width: 90vw;
+    height: 40vh;
   }
 
-  /* overflow: hidden;
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 25%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.1) 75%);
-    animation: shimmer 1.5s infinite;
+  @media screen and (max-width: 1024px) {
+    width: 80vw;
   }
-
-  @keyframes shimmer {
-    100% {
-      left: 100%;
-    }
-  } */
 `;
 
+const BackgroundImage = styled.div`
+  position: absolute;
+  inset: 0;
+    background-color: black; /* 👈 fallback di colore */
+
+  background-image: ${({ $bgImage }) => `url(${$bgImage})`};
+  background-size: 120% 110%;
+  background-position: 0% center;
+  border-radius: 25px;
+  opacity: ${({ $fade }) => ($fade ? 1 : 0)};
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+  animation: bg-pan 15s ease-in-out infinite alternate;
+
+  @keyframes bg-pan {
+    0% {
+      background-position: 0% center;
+    }
+    100% {
+      background-position: 100% center;
+    }
+  }
+`;
+
+
 const StatsContainer = styled.div`
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   width: fit-content;
   background-color: #171d289f;
-  backdrop-filter: blur(1px); /* Aggiunge un effetto di sfocatura allo sfondo */
+  backdrop-filter: blur(1px);
   border-radius: 10px;
   padding: 20px;
   gap: 50px;
@@ -157,4 +179,3 @@ const StatsContainer = styled.div`
     gap: 20px;
   }
 `;
-
