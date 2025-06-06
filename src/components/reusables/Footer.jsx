@@ -29,10 +29,11 @@ const FooterContainer = styled.div`
   color: white;
   font-size: 1.2rem;
   padding: 100px 0;
-  border-top: 2px solid #038772;
+  border-top: 4px solid #038772;
   width: 80%;
   margin: 0 auto;
   text-align: center;
+  margin: 200px auto;
 
   span{
     color: lightblue;

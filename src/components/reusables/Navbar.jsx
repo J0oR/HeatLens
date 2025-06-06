@@ -51,7 +51,8 @@ const NavContainer = styled.nav`
   font-family: "Oswald", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 2rem;
+  font-size: clamp(1rem, 1vw + 0.5rem, 2rem);
+
   background-color: #0e0d1f;
   list-style-type: none;
   position: fixed;
@@ -140,7 +141,7 @@ const StyledLink = styled(NavLink)`
 
 
   &.active {
-    color: #4D28BB;
+    color: #038772;
     font-weight: 800;
   }
 

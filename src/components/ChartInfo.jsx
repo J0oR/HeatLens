@@ -7,8 +7,9 @@ export default function ChartInfo({ dataType }) {
 
   return (
     <Container>
-      <h3>{title}</h3>
+      <h2>{title}</h2>
       <p>{text}</p>
+      <h3>Read More</h3>
       <ul>
         {links.map((link, index) => (
           <li key={index}>
@@ -43,10 +44,10 @@ const Container = styled.div`
     width: 50%;
   }
 
-  h3 {
+  h2 {
     text-align: center;
     font-family: "Oswald", sans-serif;
-    font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
+    font-size: clamp(1.5rem, 2vw + 0.5rem, 2.5rem);
   }
 
   p {
@@ -58,6 +59,12 @@ const Container = styled.div`
     }
   }
 
+  h3 {
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: clamp(1.25rem, 2.5vw + 0.5rem, 2rem);
+  }
+
   ul {
     list-style-type: none;
     display: flex;
@@ -65,10 +72,18 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     gap: 10px;
+    text-align: center;
   }
   a {
     text-decoration: none;
-    color: #038772;
+    color: #BD3221;
     font-weight: 700 !important;
+    font-size: clamp(0.8rem, 1.2rem, 1.5rem);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      color: #ff3e24;
+      text-decoration: underline;
+    }
   }
 `;

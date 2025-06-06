@@ -24,6 +24,12 @@ const Container = styled.div`
   color: white;
   font-size: 2rem;
   gap: 10px;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
+
   
   div {
     display: flex;

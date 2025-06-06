@@ -39,8 +39,7 @@ export default function YearSlider({ yearState, dataType }) {
         included={singleMode ? false : true}
         keyboard={true}
         marks={marks}
-        pushable={2}
-        allowCross={false}
+        pushable={chartDataConfig[dataType].minGap}
         handleRender={(node, props) => (
           <Tooltip overlay={`${props.value}`}  placement="top" key={props.index}>
             {node}
@@ -50,7 +49,7 @@ export default function YearSlider({ yearState, dataType }) {
 
       <ModeWrapper>
         <span className="mode-label">Range</span>
-        <SwitchButton mode={{ singleMode, setSingleMode }} yearState={yearState} yearBounds={yearBounds} />
+        <SwitchButton mode={{ singleMode, setSingleMode }} yearState={yearState} yearBounds={yearBounds} dataType={dataType}/>
         <span className="mode-label">Year</span>
       </ModeWrapper>
     </SliderContainer>

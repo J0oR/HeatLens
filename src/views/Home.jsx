@@ -14,15 +14,18 @@ function Home() {
   const { data: n2oData, isLoading: n2oLoading } = useN2O();
   const { data: polarIceData, isLoading: polarIceLoading } = usePolarIce();
 
-  const lastStat = useMemo(() => ({
-    temp: !tempLoading && tempData?.[tempData.length - 1],
-    co2: !co2Loading && co2Data?.[co2Data.length - 1],
-    methane: !methaneLoading && methaneData?.[methaneData.length - 1],
-    n2o: !n2oLoading && n2oData?.[n2oData.length - 1],
-    polarIce: !polarIceLoading && polarIceData?.[polarIceData.length - 1],
-  }), [tempData, co2Data, methaneData, n2oData, polarIceData, tempLoading, co2Loading, methaneLoading, n2oLoading, polarIceLoading]);
+  const lastStat = useMemo(
+    () => ({
+      temp: !tempLoading && tempData?.[tempData.length - 1],
+      co2: !co2Loading && co2Data?.[co2Data.length - 1],
+      methane: !methaneLoading && methaneData?.[methaneData.length - 1],
+      n2o: !n2oLoading && n2oData?.[n2oData.length - 1],
+      polarIce: !polarIceLoading && polarIceData?.[polarIceData.length - 1],
+    }),
+    [tempData, co2Data, methaneData, n2oData, polarIceData, tempLoading, co2Loading, methaneLoading, n2oLoading, polarIceLoading]
+  );
 
-  const images = ["/carousel/desert.jpg", "/carousel/glacier.jpeg", "/carousel/flood.jpg", "/carousel/iceMelt.jpg"];
+  const images = ["/carousel/desert.jpeg", "/carousel/glacier.jpeg", "/carousel/flood.jpg", "/carousel/iceMelt.jpg"];
   const [bgIndex, setBgIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
@@ -30,7 +33,7 @@ function Home() {
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
-        setBgIndex(prev => (prev + 1) % images.length);
+        setBgIndex((prev) => (prev + 1) % images.length);
         setFade(true);
       }, 1000);
     }, 6000);
@@ -58,7 +61,7 @@ function Home() {
         <BackgroundImage $bgImage={images[bgIndex]} $fade={fade} />
         {lastStat ? (
           <StatsContainer>
-            <Stat isLoading={tempLoading} amount={lastStat.temp?.station ?? "N/A"} label={"C° Anomaly"} icon={<BsThermometerSun />} />
+            <Stat isLoading={tempLoading} amount={lastStat.temp?.station ?? "N/A"} label={"C° ∆"} icon={<BsThermometerSun />} />
             <Stat isLoading={co2Loading} amount={lastStat.co2?.cycle ?? "N/A"} label={"CO2"} icon={<PiCloudArrowUpBold />} />
             <Stat isLoading={methaneLoading} amount={lastStat.methane?.average ?? "N/A"} label={"Methane"} icon={<PiCloudArrowUpBold />} />
             <Stat isLoading={n2oLoading} amount={lastStat.n2o?.average ?? "N/A"} label={"N2O"} icon={<PiCloudArrowUpBold />} />
@@ -83,11 +86,11 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 340px auto 200px auto;
+  margin: 340px auto 150px auto;
   width: 80%;
   gap: 100px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     flex-direction: column;
   }
 
@@ -117,21 +120,20 @@ const Hero = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
   padding: 20px;
-  width: 60vw;
-  height: 60vh;
+  width: 65vw;
   margin: 100px auto 200px auto;
   border-radius: 25px;
+  background-color: black; /* 👈 fallback di colore */
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-    background-color: black; /* 👈 fallback di colore */
-
 
   @media screen and (max-width: 768px) {
     align-items: center;
-    width: 90vw;
-    height: 40vh;
+    width: 100vw;
+    height: 60%;
+    border-radius: 0px;
   }
-
-  @media screen and (max-width: 1024px) {
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 80vw;
   }
 `;
@@ -139,16 +141,15 @@ const Hero = styled.div`
 const BackgroundImage = styled.div`
   position: absolute;
   inset: 0;
-    background-color: black; /* 👈 fallback di colore */
-
-  background-image: ${({ $bgImage }) => `url(${$bgImage})`};
-  background-size: 120% 110%;
-  background-position: 0% center;
+  background-color: black; /* 👈 fallback di colore */
   border-radius: 25px;
+  background-image: ${({ $bgImage }) => `url(${$bgImage})`};
+  background-size: 130%;
+  background-position: 0% center;
   opacity: ${({ $fade }) => ($fade ? 1 : 0)};
   transition: opacity 1s ease-in-out;
   z-index: 0;
-  animation: bg-pan 15s ease-in-out infinite alternate;
+  animation: bg-pan 20s ease-in-out infinite alternate;
 
   @keyframes bg-pan {
     0% {
@@ -158,8 +159,11 @@ const BackgroundImage = styled.div`
       background-position: 100% center;
     }
   }
-`;
 
+  @media screen and (max-width: 768px) {
+    border-radius: 0;
+  }
+`;
 
 const StatsContainer = styled.div`
   position: relative;
@@ -172,10 +176,12 @@ const StatsContainer = styled.div`
   backdrop-filter: blur(1px);
   border-radius: 10px;
   padding: 20px;
-  gap: 50px;
+  gap: 20px;
+  max-width: 100%;
 
   @media screen and (max-width: 768px) {
+    max-width: fit-content;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
   }
 `;

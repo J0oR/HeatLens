@@ -57,7 +57,7 @@ export default function AreaChartComponent({ data, label, dataType }) {
 
         <CartesianGrid horizontal={true} vertical={false} strokeDasharray="10" strokeWidth={0.5} stroke="#464859" opacity={1} fill="#0E0D1F" zIndex={100} />
 
-        <XAxis dataKey="timeFormatted" textAnchor="middle" height={70} interval={"preserveStart"} tickLine={false} tickMargin={30}  tick={<CustomXAxisTick />}/>
+        <XAxis dataKey="timeFormatted" textAnchor="middle" height={70} tickLine={false} tickMargin={30}  tick={<CustomXAxisTick />} minTickGap={45}/>
 
         <YAxis
           domain={[minValue, maxValue]}
@@ -79,7 +79,7 @@ export default function AreaChartComponent({ data, label, dataType }) {
 <YAxis dataKey="value" />
 <XAxis dataKey="name" />
 
-        <Tooltip content={<CustomTooltip ValueLabel={TooltipLabel} ValueUnit={TooltipUnit} />} offset={30} cursor={{ stroke: 'w', strokeWidth: 2 }}/>
+        <Tooltip content={<CustomTooltip ValueLabel={TooltipLabel} ValueUnit={TooltipUnit} />} offset={50} cursor={{ stroke: 'w', strokeWidth: 2 }}/>
 
         <Area
           type="monotone"

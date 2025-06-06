@@ -30,13 +30,12 @@ export const CustomTooltip = ({ active, payload, label, ValueLabel, ValueUnit })
 
   if (active && payload && payload.length) {
     return (
-      <div style={{ background: "#FEFCFF", padding: "10px", borderRadius: "15px", color: "#black", padding: "20px" }}>
+      <div style={{ background: "#FEFCFF", padding: "10px 20px", borderRadius: "25px", color: "#black", display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
         <p style={{ fontWeight: "bold", color: "black" }}>{label}</p>
-        {payload.map((entry, index) => (
-          <p key={index} style={{ color: entry.stroke, marginTop: "10px" }}>
-            {ValueLabel}: {typeof entry.value === "number" ? entry.value.toFixed(2) : entry.value} {ValueUnit}
+        
+          <p  style={{ color: payload[0].stroke}}>
+           {typeof payload[0].value === "number" ? payload[0].value.toFixed(2) : payload[0].value} {ValueUnit}
           </p>
-        ))}
       </div>
     );
   }

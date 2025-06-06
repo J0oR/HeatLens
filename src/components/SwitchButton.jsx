@@ -1,24 +1,28 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { chartDataConfig } from "../utils/chartDataConfig";
 
-export default function SwitchButton({ mode, yearState, yearBounds }) {
+export default function SwitchButton({ mode, yearState, yearBounds, dataType }) {
   const { yearRange, setYearRange } = yearState;
   const { singleMode, setSingleMode } = mode;
+  const gap = chartDataConfig[dataType].minGap;
 
   const toggleMode = () => {
     setSingleMode((prevMode) => !prevMode);
   };
 
-   useEffect(() => {
+  useEffect(() => {
     if (singleMode) {
       setYearRange([yearRange[1]]);
       console.log(yearRange);
+    } else {
+      if (yearRange[0] < yearBounds[0] + gap) {
+        setYearRange([yearBounds[0], yearBounds[0] + gap]);
+      } else {
+        setYearRange([yearRange[0] - gap, yearRange[0]]);
+      }
     }
-    else {
-      setYearRange([yearRange[0] - 5, yearRange[0]]);
-    }
-  }, [singleMode]); 
-  
+  }, [singleMode]);
 
   return (
     <SwitchContainer $checked={singleMode}>
@@ -27,7 +31,6 @@ export default function SwitchButton({ mode, yearState, yearBounds }) {
     </SwitchContainer>
   );
 }
-
 
 const SwitchContainer = styled.label`
   display: flex;
@@ -64,6 +67,3 @@ const Slider = styled.span`
     transform: translateX(20px);
   }
 `;
-
-
-

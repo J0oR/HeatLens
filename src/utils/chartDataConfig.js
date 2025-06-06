@@ -4,11 +4,14 @@ export const chartDataConfig = {
     line2dataKey: "land",
     yearRange: [1880, 2025],
     marks: {
-      1909: "1909",
-      1938: "1938",
-      1967: "1967",
-      1996: "1996",
+      1901: "1901",
+      1922: "1922",
+      1943: "1943",
+      1964: "1964",
+      1985: "1985",
+      2006: "2006",
     },
+    minGap: 20,
     legendPayload: [
       {
         value: "📡 Stazioni meteorologiche",
@@ -53,11 +56,13 @@ export const chartDataConfig = {
     line2dataKey: "trend",
     yearRange: [2015, 2025],
     marks: {
-      2017: "2017",
-      2019: "2019",
-      2021: "2021",
-      2023: "2023",
+      2016: "2016",
+      2018: "2018",
+      2020: "2020",
+      2022: "2022",
+      2024: "2024",
     },
+    minGap: 1,
     legendPayload: [
       {
         value: "📈 Andamento a lungo termine CO2",
@@ -107,6 +112,7 @@ export const chartDataConfig = {
       2014: "2014",
       2020: "2020",
     },
+    minGap: 2,
     legendPayload: [
       {
         value: "📡 Monthly Methane Average",
@@ -163,6 +169,7 @@ export const chartDataConfig = {
       },
     ],
     yearRange: [2002, 2025],
+    minGap: 2,
     marks: {
       2005: "2005",
       2008: "2008",
@@ -211,6 +218,7 @@ export const chartDataConfig = {
       },
     ],
     yearRange: [1979, 2025],
+    minGap: 4,
     marks: {
       1986: "1986",
       1993: "1993",

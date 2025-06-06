@@ -5,7 +5,7 @@ import { GridLoader } from "react-spinners";
 import AreaChartComponent from "./chart/AreaChart";
 
 export default function Card({ title, fetchData, label, dataType }) {
-  const [yearRange, setYearRange] = useState([2024, 2025]);
+  const [yearRange, setYearRange] = useState([2020, 2025]);
   const { data, isLoading, isError } = fetchData();
 
 
