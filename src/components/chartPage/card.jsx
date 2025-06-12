@@ -2,12 +2,11 @@ import React, { useState, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import YearSlider from "./YearSlider";
 import { GridLoader } from "react-spinners";
-import AreaChartComponent from "./chart/AreaChart";
+import AreaChartComponent from "../chart/AreaChart";
 
-export default function Card({ title, fetchData, label, dataType }) {
+export default function Card({fetchData, dataType }) {
   const [yearRange, setYearRange] = useState([2020, 2025]);
   const { data, isLoading, isError } = fetchData();
-
 
   // Filter the data based on the selected year range
   const filteredData = useMemo(() => {
@@ -26,9 +25,9 @@ export default function Card({ title, fetchData, label, dataType }) {
 
       {/* Render LineChart component with filtered data */}
       {(isLoading || !data) && <GridLoader color="#36d7b7" />}
-      {!isLoading && !isError && <AreaChartComponent data={filteredData} label={label} dataType={dataType} />}
+      {!isLoading && !isError && <AreaChartComponent data={filteredData} dataType={dataType} />}
 
-      <YearSlider yearState={{ yearRange, setYearRange }} dataType={dataType}/>
+      <YearSlider yearState={{ yearRange, setYearRange }} dataType={dataType} />
     </CardContainer>
   );
 }

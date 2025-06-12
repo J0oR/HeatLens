@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <FooterContainer>
       <p>© 2025 Heat Lens.</p>
-      <p>developed by <span>Giovanni Ruocco</span> as a final project for <S2Ilink href="https://www.start2impact.it/" target="_blank" rel="noopener noreferrer">Start2Impact University</S2Ilink></p>
+      <p>student project developed by <span>Giovanni Ruocco</span> for <S2Ilink href="https://www.start2impact.it/" target="_blank" rel="noopener noreferrer">Start2Impact University</S2Ilink></p>
       <Links>
         <a href="https://github.com/J0oR" target="_blank" rel="noopener noreferrer">
           <AiFillGithub />

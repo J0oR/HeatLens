@@ -1,4 +1,4 @@
-import { chartDataConfig } from "../utils/chartDataConfig";
+import { chartDataConfig } from "../../utils/chartDataConfig";
 import styled from "styled-components";
 
 export default function ChartSummary({ dataType }) {

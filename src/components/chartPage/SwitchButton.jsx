@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { chartDataConfig } from "../utils/chartDataConfig";
+import { chartDataConfig } from "../../utils/chartDataConfig";
 
 export default function SwitchButton({ mode, yearState, yearBounds, dataType }) {
   const { yearRange, setYearRange } = yearState;

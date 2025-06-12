@@ -112,7 +112,7 @@ export const chartDataConfig = {
       2014: "2014",
       2020: "2020",
     },
-    minGap: 2,
+    minGap: 4,
     legendPayload: [
       {
         value: "📡 Monthly Methane Average",

@@ -68,7 +68,6 @@ export const fetchMethane = async () => {
 
 export const fetchN2O = async () => {
   const { data } = await axios.get(`${BASE_URL}/nitrous-oxide-api`);
-  console.log(data);
   const formattedData = data.nitrous.map(item => {
     const floatTime = parseFloat(item.date);
     const [year, monthDecimal] = item.date.split('.').map(Number);

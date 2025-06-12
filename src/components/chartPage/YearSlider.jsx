@@ -4,7 +4,7 @@ import "rc-tooltip/assets/bootstrap.css";
 
 import styled from "styled-components";
 import SwitchButton from "./SwitchButton";
-import { chartDataConfig } from "../utils/chartDataConfig";
+import { chartDataConfig } from "../../utils/chartDataConfig";
 
 import Slider from "rc-slider";
 import Tooltip from "rc-tooltip";
@@ -41,7 +41,7 @@ export default function YearSlider({ yearState, dataType }) {
         marks={marks}
         pushable={chartDataConfig[dataType].minGap}
         handleRender={(node, props) => (
-          <Tooltip overlay={`${props.value}`}  placement="top" key={props.index}>
+          <Tooltip overlay={`${props.value}`} placement="top" key={props.index}>
             {node}
           </Tooltip>
         )}
@@ -49,7 +49,7 @@ export default function YearSlider({ yearState, dataType }) {
 
       <ModeWrapper>
         <span className="mode-label">Range</span>
-        <SwitchButton mode={{ singleMode, setSingleMode }} yearState={yearState} yearBounds={yearBounds} dataType={dataType}/>
+        <SwitchButton mode={{ singleMode, setSingleMode }} yearState={yearState} yearBounds={yearBounds} dataType={dataType} />
         <span className="mode-label">Year</span>
       </ModeWrapper>
     </SliderContainer>
@@ -93,13 +93,14 @@ const SliderStyled = styled(Slider)`
       border-radius: 2px;
       z-index: 20;
       cursor: pointer;
-      background-color: #ADD8E6;
+      background-color: #add8e6;
       opacity: 1;
-             border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
 
-      &:focus, &:hover {
+      &:focus,
+      &:hover {
         border: none !important;
         outline: none !important;
         box-shadow: none !important;

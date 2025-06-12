@@ -20,13 +20,13 @@ export default function Navbar() {
       </div>
       <LinksContainer open={open}>
         <li>
-          <StyledLink to="/temperature" className={({ isActive }) => (isActive ? 'active' : '')}>Temperature</StyledLink>
+          <StyledLink to="/temp" className={({ isActive }) => (isActive ? 'active' : '')}>Temperature</StyledLink>
         </li>
         <li>
           <StyledLink to="/co2" className={({ isActive }) => (isActive ? 'active' : '')}>C02</StyledLink>
         </li>
         <li>
-          <StyledLink to="/methane" className={({ isActive }) => (isActive ? 'active' : '')}>Methane</StyledLink>
+          <StyledLink to="/meth" className={({ isActive }) => (isActive ? 'active' : '')}>Methane</StyledLink>
         </li>
         <li>
           <StyledLink to="/n2o" className={({ isActive }) => (isActive ? 'active' : '')}>N2O</StyledLink>

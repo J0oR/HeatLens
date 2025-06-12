@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { chartDataConfig } from "../../utils/chartDataConfig";
-import { CustomYAxisTick, CustomXAxisTick,  CustomTooltip } from "./chartCustomSettings";
+import { CustomYAxisTick, CustomXAxisTick,  CustomTooltip } from "../../utils/chartCustomSettings";
 import styled from "styled-components";
 
 export default function AreaChartComponent({ data, label, dataType }) {

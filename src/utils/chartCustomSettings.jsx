@@ -1,4 +1,4 @@
-import { chartDataConfig } from "../../utils/chartDataConfig";
+import { chartDataConfig } from "./chartDataConfig";
 
 export const CustomYAxisTick = ({ x, y, payload }) => {
   return (
