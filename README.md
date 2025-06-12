@@ -12,11 +12,8 @@ Final project of the Start2Impact University Master’s in Front-End Development
 ## 📑 Table of Contents
 
 - [About The Project](#about-the-project)
-  - [Built With](#built-with)
+- [Built With](#built-with)
 - [Live Version](#live-version)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
 - [Contact](#contact)
 - [Acknowledgments](#acknowledgments)
 
