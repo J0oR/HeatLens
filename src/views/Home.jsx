@@ -25,7 +25,7 @@ function Home() {
     [tempData, co2Data, methaneData, n2oData, polarIceData, tempLoading, co2Loading, methaneLoading, n2oLoading, polarIceLoading]
   );
 
-  const images = ["/carousel/desert.jpeg", "/carousel/glacier.jpeg", "/carousel/flood.jpg", "/carousel/iceMelt.jpg"];
+  const images = ["/carousel/desert.webp", "/carousel/glacier.webp", "/carousel/flood.webp", "/carousel/iceMelt.webp"];
   const [bgIndex, setBgIndex] = useState(0);
   const [fade, setFade] = useState(true);
 
