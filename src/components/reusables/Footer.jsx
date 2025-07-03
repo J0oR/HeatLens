@@ -11,7 +11,7 @@ export default function Footer() {
         <a href="https://github.com/J0oR" target="_blank" rel="noopener noreferrer">
           <AiFillGithub />
         </a>
-        <a href="https://www.linkedin.com/in/giovanni-ruocco-b3a5492a2/" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.linkedin.com/in/giovanni-ruocco/" target="_blank" rel="noopener noreferrer">
           <FaLinkedin />
           </a>
       </Links>
